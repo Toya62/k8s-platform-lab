@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: telemetrygen-traces
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: telemetrygen
+          image: ghcr.io/open-telemetry/opentelemetry-collector-contrib/telemetrygen:v0.108.0
+          args: ["traces", "--otlp-insecure", "--otlp-endpoint", "otel-collector:4317", "--duration", "60s", "--rate", "5"]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: telemetrygen-metrics
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: telemetrygen
+          image: ghcr.io/open-telemetry/opentelemetry-collector-contrib/telemetrygen:v0.108.0
+          args: ["metrics", "--otlp-insecure", "--otlp-endpoint", "otel-collector:4317", "--duration", "120s", "--rate", "2"]

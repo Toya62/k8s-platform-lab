@@ -1,0 +1,32 @@
+image:
+  repository: data-processor
+  tag: local
+  pullPolicy: IfNotPresent
+
+aws:
+  region: us-east-1
+  endpointUrl: http://localstack:4566
+  # Dummy credentials for LocalStack only.
+  accessKeyId: test
+  secretAccessKey: test
+
+processor:
+  bucket: lab-ingress
+  key: test.txt
+  table: AuditLog
+  orgId: org-alpha-42
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 250m
+    memory: 256Mi
+
+setup:
+  enabled: true
+  image: amazon/aws-cli:latest
+
+networkPolicy:
+  enabled: true

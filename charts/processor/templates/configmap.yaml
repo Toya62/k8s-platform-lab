@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-processor-config
+data:
+  S3_BUCKET: {{ .Values.processor.bucket | quote }}
+  S3_KEY: {{ .Values.processor.key | quote }}
+  DYNAMODB_TABLE: {{ .Values.processor.table | quote }}
+  ORG_ID: {{ .Values.processor.orgId | quote }}
+  AWS_REGION: {{ .Values.aws.region | quote }}
+  AWS_ENDPOINT_URL: {{ .Values.aws.endpointUrl | quote }}

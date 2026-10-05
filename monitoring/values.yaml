@@ -1,0 +1,13 @@
+# Minimal kube-prometheus-stack values for a local lab.
+alertmanager:
+  enabled: false
+grafana:
+  adminPassword: admin   # lab only
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    resources:
+      requests:
+        cpu: 100m
+        memory: 400Mi
